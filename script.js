@@ -1,21 +1,24 @@
 //your JS code here. If required.
-const squares = document.querySelectorAll('.square');
+        document.addEventListener('DOMContentLoaded', function() {
+            const squares = document.querySelectorAll('.square');
 
-squares.forEach((square) => {
-    square.addEventListener('mouseover', handleMouseOver);
-    square.addEventListener('mouseout', handleMouseOut);
-});
+            squares.forEach((square, index) => {
+                square.addEventListener('mouseenter', () => {
+                    console.log(`Mouse entered square ${index + 1}`);
+                    squares.forEach((sq, i) => {
+                        if (i !== index) {
+                            sq.style.backgroundColor = '#6F4E37'; // Coffee
+                            console.log(`Square ${i + 1} color changed to Coffee`);
+                        }
+                    });
+                });
 
-function handleMouseOver(event) {
-    squares.forEach((square) => {
-        if (square != event.target) {
-            square.style.backgroundColor = "#6F4E37"; /* coffee color */
-        }
-    });
-}
-
-function handleMouseOut(event) {
-    squares.forEach((square) => {
-        square.style.backgroundColor = "#E6E6FA"; /* lavender color */
-    });
-}
+                square.addEventListener('mouseleave', () => {
+                    console.log(`Mouse left square ${index + 1}`);
+                    squares.forEach(sq => {
+                        sq.style.backgroundColor = '#E6E6FA'; // Lavender
+                        console.log(`Square color reset to Lavender`);
+                    });
+                });
+            });
+        });
